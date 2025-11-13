@@ -14,7 +14,8 @@ client.once("ready", () => {
 });
 
 client.on("messageCreate", (message) => {
-  if (message.author.bot) return; // Bot自身を無視
+  console.log(`[DEBUG] 受信: ${message.content}`); // ← これを追加
+  if (message.author.bot) return;
   if (message.content === "!ping") {
     message.reply("Pong!");
   }
