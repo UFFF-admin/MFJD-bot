@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import express from "express";
 // ====== Discord Bot ======
-let whitelist=[1440670444276678709];
+let whitelist=["1440670444276678709"];
 const client=new Client({
   intents:[
     GatewayIntentBits.Guilds,
@@ -24,6 +24,7 @@ client.on("messageCreate",function(message){
       break;
     }
   }
+  console.log(message.guild.id);
   if(message.author.bot&&isWhitelist){
     return;
   }
