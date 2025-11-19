@@ -17,10 +17,15 @@ client.on("messageCreate",function(message){
   }
   if(message.content=="!ufff") {
     message.delete();
-    for(let i=0;i<1000;i++){
+    let i=0;
+    let intervalNum=setInterval(function(){
+      i++;
       let random=Math.round(Math.random()*10000);
       message.channel.send("UFFF\n"+random);
-    }
+      if(i==1000){
+        clearInterval(intervalNum);
+      }
+    },10);
   }
 });
 // ====== HTTP server for Render ======
