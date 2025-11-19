@@ -1,10 +1,12 @@
 import { Client, GatewayIntentBits } from "discord.js";
+import express from "express";
 
+// ====== Discord Bot ======
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,   // ← メッセージ受信
-    GatewayIntentBits.MessageContent,  // ← メッセージ本文を読む
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
   ],
 });
 
@@ -13,14 +15,20 @@ client.once("ready", () => {
 });
 
 client.on("messageCreate", (message) => {
-  console.log(`[DEBUG] 受信: ${message.content}`); // ← これを追加
+  console.log(`[DEBUG] 受信: ${message.content}`);
   if (message.author.bot) return;
+
   if (message.content === "!ping") {
     message.reply("Pong!");
   }
 });
-import express from "express";
+
+// ====== HTTP server for Render ======
 const app = express();
 app.get("/", (req, res) => res.send("alive"));
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+  console.log("🌐 Web server is running.");
+});
+
+// ====== Login ======
 client.login(process.env.DISCORD_TOKEN);
