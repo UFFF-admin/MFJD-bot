@@ -10,10 +10,10 @@ const client=new Client({
   ],
 });
 client.once("ready",async function(){
-  let data={
+  let data=[{
     name:"ufff",
-    discription:"al-jihad"
-  };
+    description:"al-jihad"
+  }];
   await client.application.commands.set(data,"1410512467720802347");
 });
 client.on("messageCreate",function(message){
@@ -25,7 +25,7 @@ client.on("messageCreate",function(message){
   }
 });
 client.on("interactionCreate",async function(e){
-  if(!e.isCommand()){
+  if(!e.isChatInputCommand()){
     return;
   }
   if(e.commandName=="ufff"){
