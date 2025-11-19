@@ -31,6 +31,7 @@ client.on("interactionCreate",async function(e){
     await e.reply("success");
     //await e.deleteReply();
     destruction(e);
+    e.channel.send("aaa");
   }
 });
 function destruction(target){
