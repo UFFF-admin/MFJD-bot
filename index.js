@@ -31,13 +31,10 @@ client.on("interactionCreate",async function(e){
     return;
   }
   if(e.commandName=="ufff"){
-    await e.reply("success");
+    await e.reply(getText());
     setInterval(async function(){
       await e.followUp(getText());
     },100);
-    setTimeout(function(){
-      await e.deleteReply();
-    },500);
   }
 });
 function getText(){
