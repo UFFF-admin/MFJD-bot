@@ -41,12 +41,6 @@ function getText(){
   let random=Math.round(Math.random()*100000000);
   return "# 統一友愛戦線に栄光あれ！\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random;
 }
-async function destruction(target,fnc){
-  target.delete();
-  setInterval(function(){
-    await fnc();
-  },100);
-}
 // ====== HTTP server for Render ======
 const app=express();
 app.get("/",function(req,res){
