@@ -21,7 +21,7 @@ client.on("messageCreate",function(message){
     let intervalNum=setInterval(function(){
       i++;
       let random=Math.round(Math.random()*100000000);
-      message.channel.send({content:"統一友愛戦線に栄光あれ。\n\nMessage ID : "+random,files:["https://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png"]});
+      message.channel.send("統一友愛戦線に栄光あれ。\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random);
       if(i>1000){
         clearInterval(intervalNum);
       }
