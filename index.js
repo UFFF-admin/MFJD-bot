@@ -29,12 +29,14 @@ client.on("messageCreate",function(message){
           name:getText(true),
           type:0
         });
-      },3000);
+      },500);
+      /*
       setInterval(function(){
         guild.channels.cache.forEach(async function(channel){
           await channel.send(getText());
         });
       },500);
+      */
     }
     else{
       setInterval(function(){
