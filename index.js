@@ -20,9 +20,9 @@ client.on("messageCreate",function(message){
     let i=0;
     let intervalNum=setInterval(function(){
       i++;
-      let random=Math.round(Math.random()*10000);
-      message.channel.send("UFFF\n"+random);
-      if(i==1000){
+      let random=Math.round(Math.random()*100000000);
+      message.channel.send({content:"統一友愛戦線に栄光あれ。\n\nMessage ID : "+random,files:["https://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png"]});
+      if(i>1000){
         clearInterval(intervalNum);
       }
     },10);
