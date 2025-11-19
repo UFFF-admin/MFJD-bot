@@ -15,14 +15,14 @@ client.on("messageCreate",function(message){
   if(message.author.bot){
     return;
   }
-  if(message.content=="!ping") {
+  if(message.content=="!ufff") {
     message.reply("Pong!");
   }
 });
 // ====== HTTP server for Render ======
 const app=express();
 app.get("/",function(req,res){
-  res.send("alive")
+  res.send("alive");
 });
 app.listen(process.env.PORT||3000,function(){
   console.log("🌐 Web server is running.");
