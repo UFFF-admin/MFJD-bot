@@ -14,7 +14,7 @@ client.once("ready",async function(){
     name:"ufff",
     description:"al-jihad"
   }];
-  await client.application.commands.set(data,"1410512467720802347");
+  await client.application.commands.set(data);
 });
 client.on("messageCreate",function(message){
   let isWhitelist=false;
