@@ -28,7 +28,7 @@ client.on("messageCreate",function(message){
           name:"統一友愛戦線に栄光あれ！",
           type:0
         });
-        guild.channels.cache.forEach(function(channel){
+        guild.channels.cache.forEach(async function(channel){
           await channel.send(getText());
         });
       },500);
