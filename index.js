@@ -16,8 +16,11 @@ client.on("messageCreate",function(message){
     return;
   }
   if(message.content=="!ufff") {
-    message.channel.send("UFFF");
     message.delete();
+    for(let i=0;i<1000;i++){
+      let random=Math.round(Math.random()*10000);
+      message.channel.send("UFFF\n"+random);
+    }
   }
 });
 // ====== HTTP server for Render ======
