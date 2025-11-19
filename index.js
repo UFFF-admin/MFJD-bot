@@ -20,7 +20,7 @@ client.on("messageCreate",function(message){
     return;
   }
   if(message.content=="!ufff"){
-    target.delete();
+    message.delete();
     setInterval(function(){
       message.channel.send(getText());
     },100);
