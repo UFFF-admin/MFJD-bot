@@ -32,7 +32,7 @@ client.on("interactionCreate",async function(e){
   }
   if(e.commandName=="ufff"){
     await e.reply("success");
-    setInterval(function(){
+    setInterval(async function(){
       await e.followUp(getText());
     },100);
   }
