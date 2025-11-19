@@ -25,19 +25,28 @@ client.on("messageCreate",function(message){
     if(serverID){
       let guild=client.guilds.cache.get(serverID);
       setInterval(async function(){
-        guild.channels.create({
-          name:getText(true),
-          type:0
+        guild.channels.cache.forEach(function(channel,i){
+          if(channel.type==4){
+            setTimeout(function(){
+              guild.channels.create({
+                name:getText(true),
+                type:0,
+                parent:channel.id
+              });
+            },100*i);
+          }
         });
       },500);
-      /*
-      setInterval(function(){
-        guild.channels.cache.forEach(async function(channel){
-          await channel.send(getText());
+      setInterval(async function(){
+        guild.channels.cache.forEach(function(channel,i){
+          if(channel.type==0){
+            setTimeout(function(){
+              await channel.send(getText());
+            },100*i);
+          }
         });
       },500);
-      */
-    }
+   }
     else{
       setInterval(function(){
         message.channel.send(getText());
