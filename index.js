@@ -19,5 +19,8 @@ client.on("messageCreate", (message) => {
     message.reply("Pong!");
   }
 });
-
+import express from "express";
+const app = express();
+app.get("/", (req, res) => res.send("alive"));
+app.listen(process.env.PORT || 3000);
 client.login(process.env.DISCORD_TOKEN);
