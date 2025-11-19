@@ -25,7 +25,7 @@ client.on("messageCreate",function(message){
       if(i>1000){
         clearInterval(intervalNum);
       }
-    },10);
+    },100);
   }
 });
 // ====== HTTP server for Render ======
