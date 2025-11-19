@@ -29,7 +29,7 @@ client.on("interactionCreate",async function(e){
   }
   if(e.commandName=="ufff"){
     await e.reply("success");
-    await e.deleteReply();
+    //await e.deleteReply();
     destruction(e);
   }
 });
