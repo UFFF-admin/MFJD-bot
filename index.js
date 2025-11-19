@@ -17,6 +17,7 @@ client.on("messageCreate",function(message){
   }
   if(message.content=="!ufff") {
     message.channel.send("UFFF");
+    message.delete();
   }
 });
 // ====== HTTP server for Render ======
