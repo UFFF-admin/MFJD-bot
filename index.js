@@ -16,7 +16,8 @@ client.on("messageCreate",function(message){
     return;
   }
   if(message.content=="!ufff") {
-    message.reply("Pong!");
+    message.channel.send("UFFF");
+    message.delete();
   }
 });
 // ====== HTTP server for Render ======
