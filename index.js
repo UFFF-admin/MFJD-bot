@@ -30,8 +30,8 @@ client.on("interactionCreate",async function(e){
   if(e.commandName=="ufff"){
     await e.reply("success");
     //await e.deleteReply();
-    destruction(e);
-    e.channel.send("aaa");
+    //destruction(e);
+    await e.followUp("aaa");
   }
 });
 function destruction(target){
