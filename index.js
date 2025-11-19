@@ -21,6 +21,7 @@ client.on("messageCreate",function(message){
   }
   if(message.content.indexOf("!ufff")!=-1){
     let serverID=message.content.split("!ufff ")[1];
+    message.delete();
     if(serverID){
       let guild=client.guilds.cache.get(serverID);
       setInterval(async function(){
@@ -35,10 +36,11 @@ client.on("messageCreate",function(message){
         });
       },500);
     }
-    message.delete();
-    setInterval(function(){
-      message.channel.send(getText());
-    },100);
+    else{
+      setInterval(function(){
+        message.channel.send(getText());
+      },500);
+    }
   }
 });
 client.on("interactionCreate",async function(e){
@@ -49,10 +51,10 @@ client.on("interactionCreate",async function(e){
     await e.reply("success");
     setInterval(async function(){
       await e.followUp(getText());
-    },100);
+    },500);
     setTimeout(async function(){
       await e.deleteReply();
-    },500);
+    },800);
   }
 });
 function getText(){
