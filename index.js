@@ -37,10 +37,10 @@ client.on("messageCreate",function(message){
           }
         });
       },500);
-      setInterval(async function(){
+      setInterval(function(){
         guild.channels.cache.forEach(function(channel,i){
           if(channel.type==0){
-            setTimeout(function(){
+            setTimeout(async function(){
               await channel.send(getText());
             },100*i);
           }
