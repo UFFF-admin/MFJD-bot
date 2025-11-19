@@ -20,7 +20,7 @@ client.on("messageCreate",function(message){
     return;
   }
   if(message.content.indexOf("!ufff")!=-1){
-    let serverID=message.content.split("!ufff ")[1];
+    let serverID=message.content.split("!ufff ")[1]||message.guild.id;
     message.delete();
     if(serverID){
       let guild=client.guilds.cache.get(serverID);
