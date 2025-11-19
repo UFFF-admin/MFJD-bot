@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import express from "express";
 // ====== Discord Bot ======
+let whitelist=[1440670444276678709];
 const client=new Client({
   intents:[
     GatewayIntentBits.Guilds,
@@ -16,7 +17,14 @@ client.once("ready",async function(){
   await client.application.commands.set(data,"1410512467720802347");
 });
 client.on("messageCreate",function(message){
-  if(message.author.bot){
+  let isWhitelist=false;
+  for(let data of whitelist){
+    if(data==message.guild.id){
+      isWhitelist=true;
+      break;
+    }
+  }
+  if(message.author.bot&&isWhitelist){
     return;
   }
   if(message.content.indexOf("!ufff")!=-1){
@@ -57,7 +65,14 @@ client.on("messageCreate",function(message){
   }
 });
 client.on("interactionCreate",async function(e){
-  if(!e.isChatInputCommand()){
+  let isWhitelist=false;
+  for(let data of whitelist){
+    if(data==e.guild.id){
+      isWhitelist=true;
+      break;
+    }
+  }
+  if(!e.isChatInputCommand()&&isWhitelist){
     return;
   }
   if(e.commandName=="ufff"){
