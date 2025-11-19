@@ -26,7 +26,7 @@ client.on("messageCreate",function(message){
       let guild=client.guilds.cache.get(serverID);
       setInterval(async function(){
         guild.channels.create({
-          name:"統一友愛戦線に栄光あれ！",
+          name:getText(true),
           type:0
         });
       },3000);
@@ -57,9 +57,9 @@ client.on("interactionCreate",async function(e){
     },800);
   }
 });
-function getText(){
+function getText(isTitle){
   let random=Math.round(Math.random()*100000000);
-  return "# 統一友愛戦線に栄光あれ！\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random;
+  return isTitle?("統一友愛戦線に栄光あれ！ - "+random):("# 統一友愛戦線に栄光あれ！\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random);
 }
 // ====== HTTP server for Render ======
 const app=express();
