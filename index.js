@@ -35,7 +35,7 @@ client.on("interactionCreate",async function(e){
     setInterval(async function(){
       await e.followUp(getText());
     },100);
-    setTimeout(function(){
+    setTimeout(async function(){
       await e.deleteReply();
     },500);
   }
