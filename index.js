@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import express from "express";
+let i=0;
 // ====== Discord Bot ======
 const client=new Client({
   intents:[
@@ -17,13 +18,13 @@ client.on("messageCreate",function(message){
   }
   if(message.content=="!ufff") {
     message.delete();
-    let i=0;
     let intervalNum=setInterval(function(){
       i++;
       let random=Math.round(Math.random()*100000000);
       message.channel.send("# 統一友愛戦線に栄光あれ！\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random);
       if(i>1000){
         clearInterval(intervalNum);
+        i=0;
       }
     },100);
   }
