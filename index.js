@@ -1,7 +1,15 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import express from "express";
 // ====== Discord Bot ======
-let whitelist=["1340152629812002898","1357540024962384073","1433724759622811650","1438178664662568982","1274878594170097754"];
+let whitelist=[
+  "1340152629812002898",
+  "1357540024962384073",
+  "1433724759622811650",
+  "1438178664662568982",
+  "1274878594170097754",
+  "1433463270806917143",
+  "1369253248724107324"
+];
 const client=new Client({
   intents:[
     GatewayIntentBits.Guilds,
