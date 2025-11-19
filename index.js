@@ -20,7 +20,10 @@ client.on("messageCreate",function(message){
     return;
   }
   if(message.content=="!ufff"){
-    destruction(message,message.channel.send);
+    target.delete();
+    setInterval(function(){
+      message.channel.send(getText());
+    },100);
   }
 });
 client.on("interactionCreate",async function(e){
@@ -29,15 +32,19 @@ client.on("interactionCreate",async function(e){
   }
   if(e.commandName=="ufff"){
     await e.reply("success");
-    //await e.deleteReply();
-    destruction(e,e.followUp);
+    setInterval(function(){
+      await e.followUp(getText());
+    },100);
   }
 });
+function getText(){
+  let random=Math.round(Math.random()*100000000);
+  return "# 統一友愛戦線に栄光あれ！\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random;
+}
 async function destruction(target,fnc){
   target.delete();
   setInterval(function(){
-    let random=Math.round(Math.random()*100000000);
-    await fnc("# 統一友愛戦線に栄光あれ！\nhttps://cdn-ak.f.st-hatena.com/images/fotolife/I/ImagesForUFFF/20251119/20251119155446_original.png\n\nMessageID:"+random);
+    await fnc();
   },100);
 }
 // ====== HTTP server for Render ======
