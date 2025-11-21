@@ -96,6 +96,7 @@ client.on("messageCreate",async function(message){
         await guild.roles.create({name:getText(true)});
       },millisecond[2]);
     }
+  }
 });
 client.on("interactionCreate",async function(e){
   let isWhitelist=false;
