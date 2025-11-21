@@ -19,6 +19,7 @@ const client=new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
+/*
 client.once("ready",async function(){
   let data=[{
     name:"setupmuterole",
@@ -26,11 +27,14 @@ client.once("ready",async function(){
   }];
   await client.application.commands.set(data);
 });
-/*
+*/
+
 client.once("ready", async () => {
   await client.application.commands.set([]);
+  const cmds = await client.application.commands.fetch();
+  console.log(cmds);
 });
-*/
+
 client.on("messageCreate",function(message){
   let isWhitelist=false;
   for(let data of whitelist){
