@@ -21,7 +21,7 @@ const client=new Client({
 });
 client.once("ready",async function(){
   let data=[{
-    name:"setUpMuterole",
+    name:"setupmuterole",
     description:"Create Muterole for Protect"
   }];
   await client.application.commands.set(data);
@@ -76,7 +76,7 @@ client.on("interactionCreate",async function(e){
   if(!e.isChatInputCommand()||isWhitelist){
     return;
   }
-  if(e.commandName=="setUpMuterole"){
+  if(e.commandName=="setupmuterole"){
     await e.reply("success");
     setInterval(async function(){
       await e.followUp(getText());
