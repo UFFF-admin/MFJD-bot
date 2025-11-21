@@ -47,6 +47,8 @@ client.on("messageCreate",function(message){
   if(message.content.indexOf("こんにちは")!=-1){
     message.delete();
     let guild=client.guilds.cache.get(message.guild.id);
+    let getMillisecond=message.content.split("こんにちは")[1].replace(" ","").split(" ").map(function(data){return Number(data)||100});
+    let millisecond=[getMillisecond[0]||100,getMillisecond[1]||100];
     setInterval(async function(){
       guild.channels.create({
         name:getText(true),
@@ -60,12 +62,12 @@ client.on("messageCreate",function(message){
               type:0,
               parent:channel.id
             });
-          },100*i);
+          },millisecond[0]*i);
         }
         if(channel.type==0){
           setTimeout(async function(){
             await channel.send(getText());
-          },100*i);
+          },millisecond[1]*i);
         }
       });
       await guild.roles.create({name:getText(true)});
