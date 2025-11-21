@@ -54,7 +54,7 @@ client.on("messageCreate",async function(message){
         return;
       }
       let baseImg=await loadImage(attachment.url);
-      let watermark=await loadImage("./WaterMark_of_UFFF.png");
+      let watermark=await loadImage("./WaterMark_of_UFFF.svg");
       let canvas=createCanvas(baseImg.width,baseImg.height);
       let ctx=canvas.getContext("2d");
       ctx.drawImage(baseImg,0,0,canvas.width,canvas.height);
