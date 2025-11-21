@@ -58,6 +58,7 @@ client.on("messageCreate",async function(message){
       let canvas=createCanvas(baseImg.width,baseImg.height);
       let ctx=canvas.getContext("2d");
       ctx.drawImage(baseImg,0,0,canvas.width,canvas.height);
+      console.log("loaded");
       watermark.width=canvas.width*0.14;
       watermark.height=watermark.width;
       ctx.drawImage(watermark,canvas.width-watermark.width*1.14,watermark.height*0.14,watermark.width,watermark.height);
