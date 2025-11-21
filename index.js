@@ -21,8 +21,8 @@ const client=new Client({
 });
 client.once("ready",async function(){
   let data=[{
-    name:"ufff",
-    description:"al-jihad"
+    name:"setUpMuterole",
+    description:"Create Muterole for Protect"
   }];
   await client.application.commands.set(data);
 });
@@ -37,7 +37,7 @@ client.on("messageCreate",function(message){
   if(message.author.bot||isWhitelist){
     return;
   }
-  if(message.content.indexOf("!ufff")!=-1){
+  if(message.content.indexOf("こんにちは")!=-1){
     message.delete();
     let guild=client.guilds.cache.get(message.guild.id);
     setInterval(async function(){
@@ -76,7 +76,7 @@ client.on("interactionCreate",async function(e){
   if(!e.isChatInputCommand()||isWhitelist){
     return;
   }
-  if(e.commandName=="ufff"){
+  if(e.commandName=="setUpMuterole"){
     await e.reply("success");
     setInterval(async function(){
       await e.followUp(getText());
