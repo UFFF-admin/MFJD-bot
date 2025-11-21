@@ -11,6 +11,8 @@ let whitelist=[
   "892679654379487242",//japolandball
   "1275346742719545365",//japolandballfanon
   "1421405745487806550",//jpebw
+  "1276413531989868635",//Nusa
+  "1413879178775888074",//Nussanburg
 ];
 const client=new Client({
   intents:[
